@@ -153,6 +153,7 @@ class _HomeViewState extends State<HomeView> {
 
   AppBar appBar() {
     return AppBar(
+      centerTitle: false,
       automaticallyImplyLeading: false,
       title: const Text(AppConstants.appBarTitle),
       actions: const [
