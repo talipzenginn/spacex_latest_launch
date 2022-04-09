@@ -5,9 +5,9 @@ import '../../../../core/init/network/network_manager.dart';
 
 class HomeViewmodel with ChangeNotifier {
   Future getResponse() async {
-    Response response = await NetworkManager.instance!.get(
+    ResponseModel response = await NetworkManager.instance!.get(
       'latest',
-      Response.fromJson,
+      ResponseModel.fromJson,
     );
     return response;
   }

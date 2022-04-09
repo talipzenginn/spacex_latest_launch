@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/extension/context_extensions.dart';
 import '../constants/app_constants.dart';
 
 class CustomFutureBuilder<T> extends StatelessWidget {
@@ -33,14 +34,20 @@ class CustomFutureBuilder<T> extends StatelessWidget {
               return onSuccess(snapshot.data);
             } else {
               return notFoundWidget ??
-                  const Center(
-                    child: Text(AppConstants.emptyText),
+                  Center(
+                    child: Text(
+                      AppConstants.emptyText,
+                      style: context.textTheme.subtitle1,
+                    ),
                   );
             }
           default:
             return onError ??
-                const Center(
-                  child: Text(AppConstants.errorText),
+                Center(
+                  child: Text(
+                    AppConstants.errorText,
+                    style: context.textTheme.subtitle1,
+                  ),
                 );
         }
       },
