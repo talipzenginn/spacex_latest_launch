@@ -34,6 +34,7 @@ class _HomeViewState extends State<HomeView> {
               child: CustomFutureBuilder(
                 future: viewModel.getResponse(),
                 loading: shimmerForAll(),
+                notFoundWidget: notFoundWidget(),
                 onSuccess: (data) {
                   dynamic response = data;
                   return Column(
@@ -49,6 +50,45 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Column notFoundWidget() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: context.highValue * 3.3,
+        ),
+        Text(
+          AppConstants.emptyText,
+          style: context.textTheme.subtitle1,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: context.lowValue,
+        ),
+        tryAgainButton(),
+      ],
+    );
+  }
+
+  Widget tryAgainButton() {
+    return Padding(
+      padding: context.paddingLow,
+      child: TextButton(
+        onPressed: viewModel.tryAgain,
+        style: buttonStyle(),
+        child: Padding(
+          padding: context.paddingLow,
+          child: Text(
+            AppConstants.tryAgainButtonText,
+            style: context.textTheme.button,
+            textAlign: TextAlign.center,
           ),
         ),
       ),
@@ -88,19 +128,10 @@ class _HomeViewState extends State<HomeView> {
     return Padding(
       padding: context.paddingNormal,
       child: TextButton(
-        onPressed: () async {
+        onPressed: () {
           viewModel.launchWebsite(response.webcastUrl);
         },
-        style: ButtonStyle(
-          elevation: MaterialStateProperty.all<double>(5),
-          backgroundColor: MaterialStateProperty.all<Color>(
-              context.colorScheme.primary),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-          ),
-        ),
+        style: buttonStyle(),
         child: Padding(
           padding: context.paddingLow,
           child: Text(
@@ -114,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
 
   Shimmer shimmerForAll() {
     return Shimmer.fromColors(
-      baseColor:context.colorScheme.background,
+      baseColor: context.colorScheme.background,
       highlightColor: context.colorScheme.tertiary,
       child: Column(
         children: [
@@ -159,6 +190,19 @@ class _HomeViewState extends State<HomeView> {
       actions: const [
         ChangeThemeButton(),
       ],
+    );
+  }
+
+  ButtonStyle buttonStyle() {
+    return ButtonStyle(
+      elevation: MaterialStateProperty.all<double>(5),
+      backgroundColor:
+          MaterialStateProperty.all<Color>(context.colorScheme.primary),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+      ),
     );
   }
 }
