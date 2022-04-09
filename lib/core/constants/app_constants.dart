@@ -6,4 +6,6 @@ class AppConstants {
   static const noDetail = 'There is no details about this launch';
   static const launchError = 'Could not launch this page';
   static const watchButtonText = 'Watch the Launch';
+  static const dark = 'Dark';
+  static const light = 'Light';
 }

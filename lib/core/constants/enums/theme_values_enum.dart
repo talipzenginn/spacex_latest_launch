@@ -1,0 +1,1 @@
+enum ThemeValues { LIGHT, DARK }
