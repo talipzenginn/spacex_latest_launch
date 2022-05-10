@@ -2,7 +2,7 @@
     package="com.example.spacex_latest_launch">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="spacex_latest_launch"
+        android:label="SpaceX Latest Launch"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
